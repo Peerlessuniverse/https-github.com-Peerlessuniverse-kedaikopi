@@ -1,0 +1,7 @@
+{
+  "name": "Kedai Kopi Kowawa",
+  "description": "Website premium, elegan, dan membumi untuk Kedai Kopi Kowawa, menampilkan filosofi seduh dan layanan concierge kopi berbasis AI.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
