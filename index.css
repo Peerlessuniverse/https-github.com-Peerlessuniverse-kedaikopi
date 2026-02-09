@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+@theme {
+  --color-kowawa-gold: #C19A6B;
+  --color-kowawa-brown: #6F4E37;
+  --font-sans: "Montserrat", sans-serif;
+  --font-serif: "Cormorant Garamond", serif;
+}
+
+@layer base {
+  body {
+    @apply bg-[#FDFCF8] font-sans text-gray-900 overflow-x-hidden m-0;
+  }
+  h1, h2, h3, h4, .font-serif {
+    @apply font-serif;
+  }
+}
+
+.transition-premium {
+  @apply transition-all duration-500 ease-in-out;
+}

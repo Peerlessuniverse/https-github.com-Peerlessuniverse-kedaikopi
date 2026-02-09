@@ -1,33 +1,27 @@
-
 export interface MenuItem {
   id: string;
   name: string;
   description: string;
   price: number;
-  category: 'Espresso' | 'Manual Brew' | 'Signature' | 'Snacks' | 'Beans';
+  category: string;
   image: string;
-  stock: number;
 }
 
-export interface Branch {
+export interface Testimonial {
   id: string;
   name: string;
-  address: string;
-  status: 'Open' | 'Closed';
+  role: string;
+  text: string;
 }
 
-export interface CartItem extends MenuItem {
-  quantity: number;
-}
-
-export interface Order {
-  id: string;
-  items: CartItem[];
-  total: number;
-  timestamp: Date;
-  branchId: string;
-  type: 'In-Store' | 'Online';
-  status: 'Pending' | 'Completed' | 'Cancelled';
+export interface ReservationDetails {
+  id?: string;
+  name: string;
+  phone: string;
+  guests: number;
+  date: string;
+  time: string;
+  timestamp?: any;
 }
 
 export interface ChatMessage {
@@ -35,4 +29,36 @@ export interface ChatMessage {
   content: string;
 }
 
-export type ViewState = 'PUBLIC' | 'STORE' | 'POS' | 'ADMIN';
+export interface CartItem extends MenuItem {
+  quantity: number;
+}
+
+export interface AmbienceItem {
+  id: string;
+  url: string;
+  title: string;
+  type: 'image' | 'video' | 'youtube';
+}
+
+export interface SiteSettings {
+  logoUrl?: string;
+  faviconUrl?: string;
+  siteTitle?: string;
+  heroTitle?: string;
+  heroSubtitle?: string;
+  storyTitle?: string;
+  storySubtitle?: string;
+  storyDescription?: string;
+  storyPoint1Title?: string;
+  storyPoint1Desc?: string;
+  storyPoint2Title?: string;
+  storyPoint2Desc?: string;
+  footerAddress?: string;
+  footerHours?: string;
+  footerCopyright?: string;
+  footerTagline?: string;
+  instagramUrl?: string;
+  facebookUrl?: string;
+  linkedinUrl?: string;
+  geminiApiKey?: string;
+}

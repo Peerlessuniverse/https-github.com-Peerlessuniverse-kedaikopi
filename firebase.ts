@@ -1,6 +1,7 @@
 
-import { initializeApp, getApp, getApps, FirebaseApp } from "firebase/app";
-import { getFirestore, Firestore } from "firebase/firestore";
+import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDfwAqANKCQmjaRiKbvE-93GAPctM5Tw78",
@@ -12,14 +13,6 @@ const firebaseConfig = {
   measurementId: "G-C3N5T4PLWJ"
 };
 
-let db: Firestore | null = null;
-
-try {
-  const app: FirebaseApp = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
-  db = getFirestore(app);
-  console.log("Firebase & Firestore initialized successfully.");
-} catch (error) {
-  console.error("Firebase/Firestore initialization error:", error);
-}
-
-export { db };
+const app = initializeApp(firebaseConfig);
+export const db = getFirestore(app);
+export const auth = getAuth(app);

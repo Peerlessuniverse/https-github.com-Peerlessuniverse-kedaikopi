@@ -2,16 +2,15 @@
 import React, { useState } from 'react';
 import { MenuItem } from '../types';
 
-// Use items from props instead of hardcoded MENU_ITEMS constant
 interface MenuProps {
   items: MenuItem[];
+  onOrderClick: (item: MenuItem) => void;
 }
 
-export const Menu: React.FC<MenuProps> = ({ items }) => {
+export const Menu: React.FC<MenuProps> = ({ items, onOrderClick }) => {
   const [activeCategory, setActiveCategory] = useState<string>('All');
   const categories = ['All', 'Espresso', 'Manual Brew', 'Signature', 'Snacks'];
 
-  // Filter items based on the active category selected from props
   const filteredItems = activeCategory === 'All' 
     ? items 
     : items.filter(item => item.category === activeCategory);
@@ -47,11 +46,17 @@ export const Menu: React.FC<MenuProps> = ({ items }) => {
                   alt={item.name} 
                   className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-premium duration-700"
                 />
-                <div className="absolute inset-0 bg-kowawa-brown/20 opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="absolute inset-0 bg-kowawa-brown/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                   <button 
+                     onClick={(e) => { e.stopPropagation(); onOrderClick(item); }}
+                     className="bg-white text-kowawa-brown px-6 py-2 font-bold uppercase tracking-widest text-xs hover:bg-kowawa-gold hover:text-white transition-colors"
+                   >
+                     Pesan Sekarang
+                   </button>
+                </div>
               </div>
               <div className="flex justify-between items-start mb-2">
                 <h4 className="font-serif text-2xl text-kowawa-brown group-hover:text-kowawa-gold transition-colors">{item.name}</h4>
-                {/* Numeric price formatted with toLocaleString */}
                 <span className="text-kowawa-gold font-medium">Rp {item.price.toLocaleString()}</span>
               </div>
               <p className="text-gray-500 text-sm italic font-light">{item.description}</p>
