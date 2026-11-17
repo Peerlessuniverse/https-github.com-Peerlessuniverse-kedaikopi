@@ -1,20 +1,41 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# Aset Jabar
 
-# Run and deploy your AI Studio app
+Aplikasi web untuk mengelola siklus hidup Barang Milik Daerah (BMD) lintas perangkat daerah:
+dari perencanaan dan pengadaan sampai pemindahtanganan, pemusnahan, dan penghapusan.
+Tahapannya mengacu pada Permendagri 19/2016 dan golongan asetnya mengikuti KIB A–F.
 
-This contains everything you need to run your app locally.
+> Versi awal. Data bawaan adalah **data contoh fiktif**, bukan data resmi pemerintah.
 
-View your app in AI Studio: https://ai.studio/apps/drive/1cCPZVUyaI1w6B_hNUGFRsa1EZR3d12wK
+## Modul
 
-## Run Locally
+| Modul | Status |
+|---|---|
+| Dasbor (nilai, kondisi, sebaran per KIB dan perangkat daerah) | Berfungsi |
+| Inventaris Aset (cari, saring, tambah, ubah, hapus, unduh CSV) | Berfungsi |
+| Siklus Hidup (pindah tahap dengan dokumen dasar dan riwayat) | Berfungsi |
+| Pemanfaatan & Kontrak, Pemeliharaan Terjadwal, Laporan & KIB, Pengguna & Hak Akses | Menyusul |
 
-**Prerequisites:**  Node.js
+## Menjalankan
 
+```bash
+npm install
+npm run dev
+```
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+Tanpa konfigurasi, aplikasi berjalan dalam **mode demo**: data contoh disimpan di browser dan tidak perlu login.
+
+## Menghubungkan Firebase
+
+1. Buat proyek Firebase baru, aktifkan **Firestore** dan **Authentication → Email/Password**.
+2. Salin `.env.example` menjadi `.env.local` dan isi nilainya dari Firebase Console.
+3. Buat akun pengguna di Authentication (pendaftaran mandiri sengaja tidak disediakan).
+4. Pasang aturan keamanan: `firebase deploy --only firestore:rules --project <id-proyek>`.
+
+Setelah itu data disimpan di koleksi `assets` dan hanya bisa diakses pengguna yang sudah masuk.
+
+## Struktur
+
+- `src/data/reference.ts` — golongan KIB, tahap siklus, daftar perangkat daerah
+- `src/services/assetStore.ts` — lapisan data (Firestore atau penyimpanan browser)
+- `src/pages/` — Dasbor, Inventaris, Siklus Hidup, Login
+- `firestore.rules` — aturan akses Firestore
