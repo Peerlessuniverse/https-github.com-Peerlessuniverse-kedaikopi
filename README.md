@@ -26,12 +26,16 @@ Tanpa konfigurasi, aplikasi berjalan dalam **mode demo**: data contoh disimpan d
 
 ## Menghubungkan Firebase
 
-1. Buat proyek Firebase baru, aktifkan **Firestore** dan **Authentication → Email/Password**.
-2. Salin `.env.example` menjadi `.env.local` dan isi nilainya dari Firebase Console.
-3. Buat akun pengguna di Authentication (pendaftaran mandiri sengaja tidak disediakan).
-4. Pasang aturan keamanan: `firebase deploy --only firestore:rules --project <id-proyek>`.
+Aplikasi ini memakai ulang proyek Firebase lama `kowawa-fee8c` (lihat `.firebaserc`).
 
-Setelah itu data disimpan di koleksi `assets` dan hanya bisa diakses pengguna yang sudah masuk.
+1. Di Firebase Console, pastikan **Firestore** dan **Authentication → Email/Password** aktif.
+2. Salin `.env.example` menjadi `.env.local` dan isi `VITE_FIREBASE_API_KEY`; nilai lain sudah terisi.
+3. Periksa daftar pengguna di Authentication: hapus akun lama yang tidak boleh mengakses data aset, lalu buat akun baru (pendaftaran mandiri sengaja tidak disediakan).
+4. Pasang aturan keamanan: `firebase deploy --only firestore:rules`. Ini **menggantikan** aturan lama, sehingga koleksi peninggalan kedai kopi tidak bisa lagi diakses dari aplikasi.
+5. Timpa situs lama: `npm run build` lalu `firebase deploy --only hosting`.
+
+Data aset disimpan di koleksi `assets` dan hanya bisa diakses pengguna yang sudah masuk.
+Koleksi lama kedai kopi tidak dipakai; hapus dari Firebase Console bila sudah tidak diperlukan.
 
 ## Struktur
 
